@@ -169,6 +169,30 @@ class ClashMeta implements ProtocolInterface
                 'host' => data_get($protocol_settings, 'obfs.host'),
             ];
         }
+                // 检查节点名中是否包含tls
+        if (stripos($server['name'], 'tls') !== false) {
+            $array['plugin'] = 'shadow-tls';
+            $array['client-fingerprint'] = 'chrome';
+            $array['plugin-opts'] = [
+                'host' => 'cloud.tencent.com',  // 默认 host
+                'password' => 'ixejvmdGp0fuIBkg4M2Diw==',
+                'version' => 3
+            ];
+            
+            // 根据节点名选择不同的 host
+            if (stripos($server['name'], 'hk') !== false) {
+                $array['plugin-opts']['host'] = 'hkust.edu.hk';
+            } elseif (stripos($server['name'], 'us') !== false) {
+                $array['plugin-opts']['host'] = 'www.ucla.edu';
+            } elseif (stripos($server['name'], 'sg') !== false) {
+                $array['plugin-opts']['host'] = 'www.nus.edu.sg';
+            } elseif (stripos($server['name'], 'jp') !== false) {
+                $array['plugin-opts']['host'] = 'www.kyoto-u.ac.jp';
+            }
+            
+            // 去掉udp设置
+            unset($array['udp']);
+        }
         return $array;
     }
 
@@ -230,8 +254,6 @@ class ClashMeta implements ProtocolInterface
             'server' => $server['host'],
             'port' => $server['port'],
             'uuid' => $password,
-            'alterId' => 0,
-            'cipher' => 'auto',
             'udp' => true,
             'flow' => data_get($protocol_settings, 'flow'),
             'tls' => false
@@ -247,13 +269,13 @@ class ClashMeta implements ProtocolInterface
                 break;
             case 2:
                 $array['tls'] = true;
-                $array['skip-cert-verify'] = (bool) data_get($protocol_settings, 'reality_settings.allow_insecure', false);
                 $array['servername'] = data_get($protocol_settings, 'reality_settings.server_name');
                 $array['reality-opts'] = [
                     'public-key' => data_get($protocol_settings, 'reality_settings.public_key'),
                     'short-id' => data_get($protocol_settings, 'reality_settings.short_id')
                 ];
-                $array['client-fingerprint'] = Helper::getRandFingerprint();
+                $array['client-fingerprint'] = 'chrome';
+                $array['network'] = 'tcp';
                 break;
             default:
                 break;

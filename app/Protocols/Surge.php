@@ -42,7 +42,8 @@ class Surge implements ProtocolInterface
                     'aes-128-gcm',
                     'aes-192-gcm',
                     'aes-256-gcm',
-                    'chacha20-ietf-poly1305'
+                    'chacha20-ietf-poly1305',
+                    '2022-blake3-aes-128-gcm'
                 ])
             ) {
                 $proxies .= self::buildShadowsocks($item['password'], $item);
@@ -99,9 +100,33 @@ class Surge implements ProtocolInterface
             "{$server['port']}",
             "encrypt-method={$protocol_settings['cipher']}",
             "password={$password}",
-            'tfo=true',
-            'udp-relay=true'
+            'tfo=false',
+            'udp-relay=true',
+            'block-quic=on'
         ];
+
+        // 检查节点名中是否包含tls
+        if (stripos($server['name'], 'tls') !== false) {
+            array_push($config, 'shadow-tls-password="ixejvmdGp0fuIBkg4M2Diw=="');
+            
+            // 默认 SNI
+            $sni = 'cloud.tencent.com';
+            
+            // 根据节点名选择不同的 host
+            if (stripos($server['name'], 'hk') !== false) {
+                $sni = 'hkust.edu.hk';
+            } elseif (stripos($server['name'], 'us') !== false) {
+                $sni = 'www.ucla.edu';
+            } elseif (stripos($server['name'], 'sg') !== false) {
+                $sni = 'www.nus.edu.sg';
+            } elseif (stripos($server['name'], 'jp') !== false) {
+                $sni = 'www.kyoto-u.ac.jp';
+            }
+            
+            array_push($config, "shadow-tls-sni={$sni}");
+            array_push($config, 'shadow-tls-version=3');
+        }
+        
         $config = array_filter($config);
         $uri = implode(',', $config);
         $uri .= "\r\n";

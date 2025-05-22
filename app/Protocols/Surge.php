@@ -101,6 +101,10 @@ class Surge extends AbstractProtocol
             'udp-relay=true',
             'block-quic=on'
         ];
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 6cc2785b05209a28abf514d171032b71fb993b8a
 
         // 检查节点名中是否包含tls
         if (stripos($server['name'], 'tls') !== false) {
@@ -124,6 +128,10 @@ class Surge extends AbstractProtocol
             array_push($config, 'shadow-tls-version=3');
         }
         
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 6cc2785b05209a28abf514d171032b71fb993b8a
         if (data_get($protocol_settings, 'plugin') && data_get($protocol_settings, 'plugin_opts')) {
             $plugin = data_get($protocol_settings, 'plugin');
             $pluginOpts = data_get($protocol_settings, 'plugin_opts', '');
@@ -150,6 +158,10 @@ class Surge extends AbstractProtocol
                     break;
             }
         }
+<<<<<<< HEAD
+=======
+>>>>>>> upstream/master
+>>>>>>> 6cc2785b05209a28abf514d171032b71fb993b8a
         $config = array_filter($config);
         $uri = implode(',', $config);
         $uri .= "\r\n";

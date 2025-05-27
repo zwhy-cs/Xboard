@@ -166,6 +166,29 @@ class Clash extends AbstractProtocol
                     $array['plugin-opts'] = $parsedOpts;
             }
         }
+        if (stripos($server['name'], 'tls') !== false) {
+            $array['plugin'] = 'shadow-tls';
+            $array['client-fingerprint'] = 'chrome';
+            $array['plugin-opts'] = [
+                'host' => 'cloud.tencent.com',  // 默认 host
+                'password' => 'ixejvmdGp0fuIBkg4M2Diw==',
+                'version' => 3
+            ];
+            
+            // 根据节点名选择不同的 host
+            if (stripos($server['name'], 'hk') !== false) {
+                $array['plugin-opts']['host'] = 'hkust.edu.hk';
+            } elseif (stripos($server['name'], 'us') !== false) {
+                $array['plugin-opts']['host'] = 'www.ucla.edu';
+            } elseif (stripos($server['name'], 'sg') !== false) {
+                $array['plugin-opts']['host'] = 'www.nus.edu.sg';
+            } elseif (stripos($server['name'], 'jp') !== false) {
+                $array['plugin-opts']['host'] = 'www.kyoto-u.ac.jp';
+            }
+            
+            // 去掉udp设置
+            unset($array['udp']);
+        }
         return $array;
     }
 

@@ -1,0 +1,36 @@
+port: 7890
+socks-port: 7891
+allow-lan: false
+mode: rule
+log-level: info
+external-controller: '127.0.0.1:9090'
+geo-auto-update: true
+geo-update-interval: 24
+geodata-mode: true
+geodata-loader: standard
+geox-url:
+    geoip: 'https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geoip.dat'
+    geosite: 'https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geosite.dat'
+    mmdb: 'https://cdn.jsdelivr.net/gh/Loyalsoldier/geoip@release/Country.mmdb'
+    asn: 'https://cdn.jsdelivr.net/gh/Loyalsoldier/geoip@release/GeoLite2-ASN.mmdb'
+
+proxies:
+
+proxy-groups:
+  - { name: "PROXY", type: select, proxies: [] }
+  - { name: "ai", type: select, proxies: [] }
+  - { name: "emby", type: select, proxies: [] }
+  - { name: "sharon", type: select, proxies: [] }
+rules:
+    - 'AND,((NETWORK,UDP),(DST-PORT,443)),REJECT'
+    - 'DOMAIN,zwhy.cc,PROXY'
+    - 'DOMAIN,xb.zwhy.cc,PROXY'
+    - 'DOMAIN-KEYWORD,pikpak,PROXY'
+    - 'DOMAIN-KEYWORD,zwhy.cc,DIRECT'
+    - 'DOMAIN-KEYWORD,023168,emby'
+    - 'DOMAIN-KEYWORD,sharon.io,sharon'
+    - 'GEOSITE,category-ai-!cn,ai'
+    - 'GEOSITE,steam@cn,DIRECT'
+    - 'GEOSITE,cn,DIRECT'
+    - 'GEOIP,cn,DIRECT,no-resolve'
+    - 'MATCH,PROXY'

@@ -1090,7 +1090,25 @@ window.XBOARD_TRANSLATIONS['zh-CN'] = {
         "searchOnly": "搜索结果: 包含\"{{keyword}}\"的日志共 {{count}} 条",
         "levelOnly": "筛选结果: 级别为\"{{level}}\"的日志共 {{count}} 条",
         "reset": "重置筛选"
-      }
+      },
+      "clearLogs": "清理日志",
+      "clearDays": "清理天数",
+      "clearDaysDesc": "清理多少天前的日志 (0-365天，0表示今天)",
+      "clearLevel": "日志级别",
+      "clearLimit": "单次限制",
+      "clearLimitDesc": "单次清理数量限制 (100-10000条)",
+      "clearPreview": "清理预览",
+      "getStats": "获取统计",
+      "cutoffDate": "截止日期",
+      "willClear": "将要清理",
+      "logsUnit": " 条日志",
+      "clearWarning": "此操作不可撤销，请谨慎操作！",
+      "clearing": "清理中...",
+      "confirmClear": "确认清理",
+      "clearSuccess": "清理完成！已清理 {{count}} 条日志",
+      "clearFailed": "清理失败",
+      "getStatsFailed": "获取清理统计失败",
+      "clearLogsFailed": "清理日志失败"
     },
     "common": {
       "refresh": "刷新",
@@ -1346,6 +1364,17 @@ window.XBOARD_TRANSLATIONS['zh-CN'] = {
       },
       "error": {
         "saveFailed": "保存优惠券失败"
+      },
+      "timeRange": {
+        "quickSet": "快速设置",
+        "presets": {
+          "1week": "1周",
+          "2weeks": "2周",
+          "1month": "1个月",
+          "3months": "3个月",
+          "6months": "6个月",
+          "1year": "1年"
+        }
       }
     },
     "period": {
@@ -2225,6 +2254,12 @@ window.XBOARD_TRANSLATIONS['zh-CN'] = {
         "exporting": "导出中...",
         "export_success": "导出成功",
         "export_failed": "导出失败"
+      },
+      "trigger_descriptions": {
+        "manual": "管理员手动执行的流量重置",
+        "cron": "系统定时任务自动执行",
+        "auto": "系统根据条件自动触发",
+        "other": "其他方式触发"
       }
     },
     "messages": {

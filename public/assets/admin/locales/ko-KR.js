@@ -1108,7 +1108,25 @@ window.XBOARD_TRANSLATIONS['ko-KR'] = {
         "searchOnly": "검색 결과: \\\"{{keyword}}\\\"를 포함하는 로그 {{count}}개",
         "levelOnly": "필터 결과: 레벨이 \\\"{{level}}\\\"인 로그 {{count}}개",
         "reset": "필터 초기화"
-      }
+      },
+      "clearLogs": "로그 삭제",
+      "clearDays": "삭제 일수",
+      "clearDaysDesc": "며칠 전 로그를 삭제할지 (0-365일, 0은 오늘)",
+      "clearLevel": "로그 레벨",
+      "clearLimit": "배치 제한",
+      "clearLimitDesc": "배치 삭제 수량 제한 (100-10000건)",
+      "clearPreview": "삭제 미리보기",
+      "getStats": "통계 가져오기",
+      "cutoffDate": "마감일",
+      "willClear": "삭제 예정",
+      "logsUnit": "개 로그",
+      "clearWarning": "이 작업은 되돌릴 수 없습니다. 신중하게 진행해 주세요!",
+      "clearing": "삭제 중...",
+      "confirmClear": "삭제 확인",
+      "clearSuccess": "삭제 완료! {{count}}개 로그 삭제됨",
+      "clearFailed": "삭제 실패",
+      "getStatsFailed": "삭제 통계 가져오기 실패",
+      "clearLogsFailed": "로그 삭제 실패"
     },
     "common": {
       "refresh": "새로고침",
@@ -1370,6 +1388,17 @@ window.XBOARD_TRANSLATIONS['ko-KR'] = {
       },
       "error": {
         "saveFailed": "쿠폰 저장 실패"
+      },
+      "timeRange": {
+        "quickSet": "빠른 설정",
+        "presets": {
+          "1week": "1주",
+          "2weeks": "2주",
+          "1month": "1개월",
+          "3months": "3개월",
+          "6months": "6개월",
+          "1year": "1년"
+        }
       }
     },
     "period": {
@@ -2245,6 +2274,12 @@ window.XBOARD_TRANSLATIONS['ko-KR'] = {
         "exporting": "내보내는 중...",
         "export_success": "내보내기 성공",
         "export_failed": "내보내기 실패"
+      },
+      "trigger_descriptions": {
+        "manual": "관리자가 수동으로 실행한 트래픽 재설정",
+        "cron": "시스템 예약 작업에 의한 자동 실행",
+        "auto": "시스템이 조건에 따라 자동 트리거",
+        "other": "기타 방법으로 트리거"
       }
     },
     "send_mail": {

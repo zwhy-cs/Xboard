@@ -329,7 +329,7 @@ class ClashMeta extends AbstractProtocol
                     'public-key' => data_get($protocol_settings, 'reality_settings.public_key'),
                     'short-id' => data_get($protocol_settings, 'reality_settings.short_id')
                 ];
-                $array['client-fingerprint'] = 'firefox';
+                $array['client-fingerprint'] = 'chrome';
                 $array['network'] = 'tcp';
                 break;
             default:

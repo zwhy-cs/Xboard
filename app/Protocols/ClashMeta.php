@@ -227,7 +227,7 @@ class ClashMeta extends AbstractProtocol
             $array['plugin'] = 'shadow-tls';
             $array['client-fingerprint'] = 'chrome';
             $array['plugin-opts'] = [
-                'host' => 'cloud.tencent.com',  // 默认 host
+                'host' => 'www.cloud.tencent.com',  // 默认 host
                 'password' => 'ixejvmdGp0fuIBkg4M2Diw==',
                 'version' => 3
             ];

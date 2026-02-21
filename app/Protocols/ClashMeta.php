@@ -328,7 +328,7 @@ class ClashMeta extends AbstractProtocol
                 $array['reality-opts'] = [
                     'public-key' => data_get($protocol_settings, 'reality_settings.public_key'),
                     'short-id' => data_get($protocol_settings, 'reality_settings.short_id'),
-                    'support-x25519mlkem768' => 'false'
+                    'support-x25519mlkem768' => false
                 ];
                 $array['client-fingerprint'] = 'chrome';
                 $array['network'] = 'tcp';

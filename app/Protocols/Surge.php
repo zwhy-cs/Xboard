@@ -113,8 +113,9 @@ class Surge extends AbstractProtocol
             "{$server['port']}",
             "encrypt-method={$protocol_settings['cipher']}",
             "password={$password}",
-            'tfo=true',
-            'udp-relay=true'
+            'tfo=false',
+            'udp-relay=true',
+            'block-quic=on'
         ];
         if (data_get($protocol_settings, 'plugin') && data_get($protocol_settings, 'plugin_opts')) {
             $plugin = data_get($protocol_settings, 'plugin');

@@ -3,7 +3,7 @@
 namespace App\Protocols;
 
 use App\Models\Server;
-use App\Utils\Helper;ghcr.io/zwhy-cs/xboard:new
+use App\Utils\Helper;
 use Illuminate\Support\Facades\File;
 use Symfony\Component\Yaml\Yaml;
 use App\Support\AbstractProtocol;

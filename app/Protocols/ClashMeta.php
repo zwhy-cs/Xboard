@@ -212,27 +212,6 @@ class ClashMeta extends AbstractProtocol
             ->header('content-disposition', 'attachment;filename*=UTF-8\'\'' . rawurlencode($appName));
     }
 
-    /**
-     * Build the rules for Clash.
-     */
-    public function buildRules($config)
-    {
-        // Force the current subscription domain to be a direct rule
-        $subsDomain = request()->header('Host');
-        if ($subsDomain) {
-            array_unshift($config['rules'], "DOMAIN,{$subsDomain},DIRECT");
-        }
-        // // Force the nodes ip to be a direct rule
-        // collect($this->servers)->pluck('host')->map(function ($host) {
-        //     $host = trim($host);
-        //     return filter_var($host, FILTER_VALIDATE_IP) ? [$host] : Helper::getIpByDomainName($host);
-        // })->flatten()->unique()->each(function ($nodeIP) use (&$config) {
-        //     array_unshift($config['rules'], "IP-CIDR,{$nodeIP}/32,DIRECT,no-resolve");
-        // });
-
-        return $config;
-    }
-
     public static function buildShadowsocks($password, $server)
     {
         $protocol_settings = $server['protocol_settings'];

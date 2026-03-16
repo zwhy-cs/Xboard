@@ -152,6 +152,11 @@ class ClashMeta extends AbstractProtocol
             ->header('content-disposition', 'attachment;filename*=UTF-8\'\'' . rawurlencode($appName));
     }
 
+    public function buildRules($config)
+    {
+        return $config;
+    }
+    
     public static function buildShadowsocks($password, $server)
     {
         $protocol_settings = $server['protocol_settings'];

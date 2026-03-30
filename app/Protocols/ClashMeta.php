@@ -314,6 +314,10 @@ class ClashMeta extends AbstractProtocol
             'uuid' => $password,
             'udp' => true,
             'flow' => data_get($protocol_settings, 'flow'),
+            'encryption' => match (data_get($protocol_settings, 'encryption.enabled')) {
+                true => data_get($protocol_settings, 'encryption.encryption', 'none'),
+                default => 'none'
+            },
             'tls' => false
         ];
 

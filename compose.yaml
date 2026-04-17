@@ -14,7 +14,7 @@ services:
       - redis
     # network_mode: host
     command: php artisan octane:start --host=0.0.0.0 --port=7001
-    restart: on-failure
+    restart: unless-stopped
     ports:
       - 7001:7001
   horizon:
@@ -25,13 +25,13 @@ services:
       - ./.docker/.data/:/www/.docker/.data
       - ./storage/logs:/www/storage/logs
       - ./plugins:/www/plugins
-    restart: on-failure
+    restart: unless-stopped
     # network_mode: host
     command: php artisan horizon
     depends_on:
       - redis
   ws-server:
-    image: ghcr.io/cedar2025/xboard:new
+    image: ghcr.io/zwhy-cs/xboard:new
     volumes:
       - redis-data:/data
       - ./.env:/www/.env
@@ -42,7 +42,7 @@ services:
     command: php artisan ws-server start
     depends_on:
       - redis
-    restart: on-failure
+    restart: unless-stopped
     ports:
       - 8076:8076
   redis:

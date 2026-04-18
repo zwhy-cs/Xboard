@@ -30,7 +30,7 @@ RUN echo "Attempting to clone branch: ${BRANCH_NAME} from ${REPO_URL} with CACHE
 
 COPY .docker/supervisor/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-RUN COMPOSER_NO_AUDIT=1 composer install --no-cache --no-dev \
+RUN composer install --no-cache --no-dev --no-security-blocking \
     && php artisan storage:link \
     && cp -r plugins/ /opt/default-plugins/ \
     && chown -R www:www /www \

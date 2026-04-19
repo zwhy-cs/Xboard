@@ -225,6 +225,8 @@ class ManageController extends Controller
             'ids' => 'required|array',
             'ids.*' => 'integer',
             'show' => 'nullable|integer|in:0,1',
+            'enabled' => 'nullable|boolean',
+            'machine_id' => 'nullable|integer',
         ]);
 
         $ids = $params['ids'];
@@ -236,13 +238,25 @@ class ManageController extends Controller
         if (array_key_exists('show', $params) && $params['show'] !== null) {
             $update['show'] = (int) $params['show'];
         }
+        if (array_key_exists('enabled', $params) && $params['enabled'] !== null) {
+            $update['enabled'] = (bool) $params['enabled'];
+        }
+        if (array_key_exists('machine_id', $params)) {
+            $update['machine_id'] = $params['machine_id'] ?: null;
+        }
 
         if (empty($update)) {
             return $this->fail([400, '没有可更新的字段']);
         }
 
         try {
-            Server::whereIn('id', $ids)->update($update);
+            $servers = Server::whereIn('id', $ids)->get();
+            DB::transaction(function () use ($servers, $update) {
+                /** @var Server $server */
+                foreach ($servers as $server) {
+                    $server->update($update);
+                }
+            });
             return $this->success(true);
         } catch (\Exception $e) {
             Log::error($e);

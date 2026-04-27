@@ -166,7 +166,7 @@ class Stash extends AbstractProtocol
         // Force the current subscription domain to be a direct rule
         $subsDomain = request()->header('Host');
         if ($subsDomain) {
-            array_unshift($config['rules'], "DOMAIN,{$subsDomain},DIRECT");
+            array_unshift($config['rules'], "DOMAIN,{$subsDomain},PROXY");
         }
 
         $yaml = Yaml::dump($config, 2, 4, Yaml::DUMP_EMPTY_ARRAY_AS_SEQUENCE);
@@ -184,6 +184,8 @@ class Stash extends AbstractProtocol
         $array = [];
         $array['name'] = $server['name'];
         $array['type'] = 'ss';
+        $array['udp-over-tcp'] = true;
+        $array['udp-over-tcp-version'] = 2;
         $array['server'] = $server['host'];
         $array['port'] = $server['port'];
         $array['cipher'] = data_get($protocol_settings, 'cipher');

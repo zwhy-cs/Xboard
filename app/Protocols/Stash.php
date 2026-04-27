@@ -184,8 +184,8 @@ class Stash extends AbstractProtocol
         $array = [];
         $array['name'] = $server['name'];
         $array['type'] = 'ss';
-        $array['udp-over-tcp'] = true;
-        $array['udp-over-tcp-version'] = 2;
+        // $array['udp-over-tcp'] = true;
+        // $array['udp-over-tcp-version'] = 2;
         $array['server'] = $server['host'];
         $array['port'] = $server['port'];
         $array['cipher'] = data_get($protocol_settings, 'cipher');

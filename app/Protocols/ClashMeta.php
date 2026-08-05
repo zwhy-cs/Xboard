@@ -200,6 +200,8 @@ class ClashMeta extends AbstractProtocol
         foreach ($config['proxy-groups'] as $k => $v) {
             if (!is_array($config['proxy-groups'][$k]['proxies']))
                 $config['proxy-groups'][$k]['proxies'] = [];
+            if (!empty($config['proxy-groups'][$k]['use']))
+                continue;
             $isFilter = false;
             foreach ($config['proxy-groups'][$k]['proxies'] as $src) {
                 foreach ($proxies as $dst) {
@@ -219,7 +221,7 @@ class ClashMeta extends AbstractProtocol
             $config['proxy-groups'][$k]['proxies'] = array_merge($config['proxy-groups'][$k]['proxies'], $proxies);
         }
         $config['proxy-groups'] = array_filter($config['proxy-groups'], function ($group) {
-            return $group['proxies'];
+            return !empty($group['proxies']) || !empty($group['use']);
         });
         $config['proxy-groups'] = array_values($config['proxy-groups']);
         $config = $this->buildRules($config);

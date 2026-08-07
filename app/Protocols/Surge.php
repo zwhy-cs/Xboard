@@ -48,7 +48,7 @@ class Surge extends AbstractProtocol
                     '2022-blake3-aes-256-gcm'
                 ])
             ) {
-                $proxies .= self::buildShadowsocks($item['password'], $item);
+                $proxies .= self::appendUnderlyingProxy(self::buildShadowsocks($item['password'], $item), $item);
                 $proxyGroup .= $item['name'] . ', ';
             }
             if ($item['type'] === Server::TYPE_VMESS) {
@@ -101,6 +101,15 @@ class Surge extends AbstractProtocol
         return response($config, 200)
             ->header('content-type', 'application/octet-stream')
             ->header('content-disposition', "attachment;filename*=UTF-8''" . rawurlencode($appName) . ".conf");
+    }
+
+    private static function appendUnderlyingProxy($proxy, $server)
+    {
+        if ($proxy === '' || !str_contains($server['name'], '链式')) {
+            return $proxy;
+        }
+
+        return rtrim($proxy, "\r\n") . ',underlying-proxy=huayun' . "\r\n";
     }
 
 

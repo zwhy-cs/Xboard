@@ -109,7 +109,7 @@ class Surge extends AbstractProtocol
             return $proxy;
         }
 
-        return rtrim($proxy, "\r\n") . ',underlying-proxy=huayun' . "\r\n";
+        return rtrim($proxy, "\r\n") . ',underlying-proxy=机场前置' . "\r\n";
     }
 
 

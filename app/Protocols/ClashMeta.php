@@ -198,7 +198,7 @@ class ClashMeta extends AbstractProtocol
 
         foreach ($proxy as &$item) {
             if (str_contains($item['name'], '链式')) {
-                $item['dialer-proxy'] = '花云';
+                $item['dialer-proxy'] = '机场前置';
             }
         }
         unset($item);
@@ -207,7 +207,10 @@ class ClashMeta extends AbstractProtocol
         foreach ($config['proxy-groups'] as $k => $v) {
             if (!is_array($config['proxy-groups'][$k]['proxies']))
                 $config['proxy-groups'][$k]['proxies'] = [];
-            if (!empty($config['proxy-groups'][$k]['use']))
+            if (
+                !empty($config['proxy-groups'][$k]['use']) ||
+                ($config['proxy-groups'][$k]['name'] ?? null) === '机场前置'
+            )
                 continue;
             $isFilter = false;
             foreach ($config['proxy-groups'][$k]['proxies'] as $src) {

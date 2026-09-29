@@ -250,10 +250,20 @@ class ClashMeta extends AbstractProtocol
      */
     public function buildRules($config)
     {
-        // Force the current subscription domain to be a direct rule
-        $subsDomain = request()->header('Host');
+        // Keep this fork's PROXY default when the setting is absent or invalid.
+        $policy = admin_setting('subscribe_domain_rule', 'PROXY');
+        if (!in_array($policy, ['DIRECT', 'PROXY', 'OFF'], true)) {
+            $policy = 'PROXY';
+        }
+        if ($policy === 'OFF') {
+            return $config;
+        }
+
+        // Use the hostname without a port; leave templates untouched without Host.
+        $subsDomain = request()->header('Host') ? request()->getHost() : null;
         if ($subsDomain) {
-            array_unshift($config['rules'], "DOMAIN,{$subsDomain},PROXY");
+            $config['rules'] ??= [];
+            array_unshift($config['rules'], "DOMAIN,{$subsDomain},{$policy}");
         }
         // // Force the nodes ip to be a direct rule
         // collect($this->servers)->pluck('host')->map(function ($host) {

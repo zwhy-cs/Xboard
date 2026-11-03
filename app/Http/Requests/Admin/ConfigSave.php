@@ -37,6 +37,7 @@ class ConfigSave extends FormRequest
         'currency_symbol' => '',
         'ticket_must_wait_reply' => '',
         // subscribe
+        'subscribe_domain_rule' => 'sometimes|required|string|in:DIRECT,PROXY,OFF',
         'plan_change_enable' => '',
         'reset_traffic_method' => 'in:0,1,2,3,4',
         'surplus_enable' => '',
@@ -127,6 +128,7 @@ class ConfigSave extends FormRequest
     {
         // illiteracy prompt
         return [
+            'subscribe_domain_rule.in' => '订阅域名规则只能选择 DIRECT、PROXY 或 OFF（关闭）',
             'app_url.url' => '站点URL格式不正确，必须携带http(s)://',
             'subscribe_url.url' => '订阅URL格式不正确，必须携带http(s)://',
             'server_token.min' => '通讯密钥长度必须大于16位',
